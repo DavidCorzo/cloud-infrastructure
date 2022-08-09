@@ -13,6 +13,9 @@
           - python3-setuptools
         state: latest
         update_cache: true
+    - name: install fcntl
+      pip:
+        name: fcntl
     - name: update
       shell: 
         apt-get update
@@ -25,4 +28,8 @@
     - name: install npm
       shell: 
         apt-get install -y nodejs npm
+    - name: run app
+        shell: 
+          cd app && node app.js
+
       
