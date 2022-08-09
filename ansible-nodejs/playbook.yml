@@ -1,0 +1,28 @@
+- hosts: all
+  name: Ansible
+  tasks:
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+    - name: update
+      shell: 
+        apt-get update
+    - name: upgrade
+      shell: 
+        apt-get upgrade
+    - name: install nodejs
+      shell: 
+        apt-get install -y nodejs 
+    - name: install npm
+      shell: 
+        apt-get install -y nodejs npm
+      
