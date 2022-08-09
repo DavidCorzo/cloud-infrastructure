@@ -28,6 +28,7 @@ config.vm.box = "ubuntu/jammy64"
 ´´´
 4. Despues con el comando ´´´vagrant up´´´ levantamos la máquina y se empieza a bajar la imagen además de instalar nodejs. Despues de aproximadamente 10 minutos tendremos finalmente la máquina con nodejs instalado.
 5. Al meter a la línea de comando ´´´vagrant ssh´´´ podremos meternos a la línea de comando de la máquina recien creada. Al ingresar ´´´node -v´´´ nos imprimirá la versión.
+<br>
 ![confirmación de funcionamiento](./figs/20220808203134.png)
 ![app corriendo](./figs/20220808221706.png)
 6. Para correr solo se debe de poner 'vagrant up' y se correrá.
