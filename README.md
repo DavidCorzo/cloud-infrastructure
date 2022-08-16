@@ -35,3 +35,59 @@ config.vm.box = "ubuntu/jammy64"
 
 
 # Con ansible
+0. Poner ´´´vagrant init´´´ y agregarle lo siguiente al archivo:
+´´´
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/kinetic64"
+    # copiar la app de host a guest
+    config.vm.provision :file, source: './app', destination: "$HOME/app"
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbook.yml"
+    end
+    config.vm.provider "virtualbox" do |vb|
+      vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+    end
+    config.vm.provider :virtualbox do |vb|
+      vb.gui = true
+    end
+  end
+´´´
+
+1. Crear un archivo llamado playbook.yaml y agregar los comandos correspondientes.
+´´´
+- hosts: all
+  name: Ansible
+  tasks:
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+    - name: install fcntl
+      pip:
+        name: fcntl
+    - name: update
+      shell: 
+        apt-get update
+    - name: upgrade
+      shell: 
+        apt-get upgrade
+    - name: install nodejs
+      shell: 
+        apt-get install -y nodejs 
+    - name: install npm
+      shell: 
+        apt-get install -y nodejs npm
+    - name: run app
+      shell: 
+        cd app && node app.js
+´´´
+
+2. Con ´´´vagrant up´´´ podemos verlo funcionar.

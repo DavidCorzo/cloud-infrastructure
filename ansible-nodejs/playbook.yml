@@ -29,7 +29,7 @@
       shell: 
         apt-get install -y nodejs npm
     - name: run app
-        shell: 
-          cd app && node app.js
+      shell: 
+        cd app && node app.js
 
       
